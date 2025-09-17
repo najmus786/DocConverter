@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image & PDF Tool</title>
+  
+  <!-- Cropper.js CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- PDF-lib and PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>📸 Image & PDF Resizer</h1>
+    <p class="quote">Made by Mohd. Zunaid</p>
+  </header>
+
+  <div class="tab-buttons">
+    <button onclick="showTab('jpegToPdf')">JPEG ➝ PDF</button>
+    <button onclick="showTab('pdfToJpeg')">PDF ➝ JPEG</button>
+    <button onclick="showTab('resizeJpeg')">Resize JPEG</button>
+    <button onclick="showTab('resizePdf')">Resize PDF</button>
+  </div>
+
+  <!-- 1️⃣ JPEG ➝ PDF -->
+  <div class="tab-content" id="jpegToPdf">
+    <h2>JPEG ➝ PDF</h2>
+    <input type="file" id="jpegToPdfInput" accept="image/jpeg" multiple>
+    <button onclick="startCrop('jpegToPdfInput','jpegToPdfCropPreview')">Start Crop</button>
+    <button onclick="applyCrop('jpegToPdfCropPreview')">Apply Crop</button>
+    <div id="jpegToPdfCropPreview" class="preview"></div>
+    <input type="number" id="jpegToPdfTargetKB" placeholder="Target Size (KB)">
+    <button onclick="convertJpegToPdf()">Generate PDF</button>
+    <iframe id="jpegToPdfPreview" class="preview-frame"></iframe>
+    <a id="jpegToPdfDownload" class="download-btn" download="output.pdf">Download PDF</a>
+  </div>
+
+  <!-- 2️⃣ PDF ➝ JPEG -->
+  <div class="tab-content" id="pdfToJpeg" style="display:none;">
+    <h2>PDF ➝ JPEG</h2>
+    <input type="file" id="pdfToJpegInput" accept="application/pdf">
+    <button onclick="convertPdfToJpeg()">Convert & Preview</button>
+    <div id="pdfToJpegPreview" class="preview"></div>
+    <a id="pdfToJpegDownload" class="download-btn" download="page.jpg">Download JPEG</a>
+  </div>
+
+  <!-- 3️⃣ Resize JPEG -->
+  <div class="tab-content" id="resizeJpeg" style="display:none;">
+    <h2>Resize JPEG</h2>
+    <input type="file" id="jpegResizeInput" accept="image/jpeg">
+    <button onclick="startCrop('jpegResizeInput','jpegResizeCropPreview')">Start Crop</button>
+    <button onclick="applyCrop('jpegResizeCropPreview')">Apply Crop</button>
+    <div id="jpegResizeCropPreview" class="preview"></div>
+    <input type="number" id="jpegResizeTargetKB" placeholder="Target Size (KB)">
+    <button onclick="resizeJPEG()">Resize & Preview</button>
+    <img id="jpegResizePreview" class="preview-img">
+    <a id="jpegResizeDownload" class="download-btn" download="resized.jpg">Download JPEG</a>
+  </div>
+
+  <!-- 4️⃣ Resize PDF -->
+  <div class="tab-content" id="resizePdf" style="display:none;">
+    <h2>Resize PDF</h2>
+    <input type="file" id="pdfResizeInput" accept="application/pdf">
+    <input type="number" id="pdfResizeTargetKB" placeholder="Target Size (KB)">
+    <button onclick="resizePDF()">Resize PDF</button>
+    <iframe id="pdfResizePreview" class="preview-frame"></iframe>
+    <a id="pdfResizeDownload" class="download-btn" download="resized.pdf">Download PDF</a>
+  </div>
+
+  <footer>
+    <p>📩 Contact: <a href="mailto:zunaid@example.com">zunaid@example.com</a> | 📞 +91-9876543210</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
