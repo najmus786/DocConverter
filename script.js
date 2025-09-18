@@ -1,10 +1,12 @@
 // ===== Tab Switcher =====
-function showTab(tabId) {
-  document.querySelectorAll(".tab-content").forEach(div => div.style.display = "none");
-  document.getElementById(tabId).style.display = "block";
+function switchTab(btn, tabId){
+  document.querySelectorAll('.tab-content').forEach(d=>d.style.display='none');
+  document.getElementById(tabId).style.display='block';
+  document.querySelectorAll('.tab-buttons button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
-// ===== Photoshop-style Cropper =====
+// ===== Cropper =====
 let cropper = null;
 let currentPreviewContainer = null;
 
@@ -27,7 +29,7 @@ function startCrop(inputId, previewContainerId) {
 
     if (cropper) cropper.destroy();
     cropper = new Cropper(img, {
-      aspectRatio: NaN, // free crop
+      aspectRatio: NaN,
       viewMode: 1,
       autoCropArea: 0.8,
       movable: true,
@@ -54,29 +56,6 @@ function applyCrop(previewContainerId) {
 
   cropper.destroy();
   cropper = null;
-}
-
-// ===== Helper: Compress Image =====
-function compressImage(file, quality = 0.9) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        canvas.getContext("2d").drawImage(img, 0, 0);
-        canvas.toBlob(blob => {
-          const fr = new FileReader();
-          fr.onload = () => resolve(fr.result);
-          fr.readAsArrayBuffer(blob);
-        }, "image/jpeg", quality);
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
 }
 
 // ===== JPEG ➝ PDF =====
@@ -126,7 +105,7 @@ async function convertPdfToJpeg() {
   document.getElementById("pdfToJpegDownload").href = jpegDataUrl;
 }
 
-// ===== JPEG Resize =====
+// ===== Resize JPEG =====
 function resizeJPEG() {
   if (!currentPreviewContainer) return alert("Crop image first!");
   const imgEl = currentPreviewContainer.querySelector("img");
@@ -150,7 +129,7 @@ function resizeJPEG() {
   document.getElementById("jpegResizeDownload").href = result;
 }
 
-// ===== PDF Resize (basic copy) =====
+// ===== Resize PDF =====
 async function resizePDF() {
   const file = document.getElementById("pdfResizeInput").files[0];
   if (!file) return alert("Select a PDF file.");
