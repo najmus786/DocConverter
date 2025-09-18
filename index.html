@@ -7,11 +7,9 @@
 
   <!-- Cropper.js CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- PDF-lib and PDF.js -->
+  <!-- PDF-lib & PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
@@ -30,51 +28,49 @@
   <button onclick="switchTab(this,'resizePdf')">Resize PDF</button>
 </div>
 
-<!-- 1️⃣ JPEG ➝ PDF -->
+<!-- JPEG ➝ PDF -->
 <div class="tab-content" id="jpegToPdf">
   <h2>JPEG ➝ PDF</h2>
-  <label class="custom-file-label" for="jpegToPdfInput">Choose JPEG</label>
+  <label class="custom-file-label" for="jpegToPdfInput">Choose JPEG(s)</label>
   <input type="file" id="jpegToPdfInput" accept="image/jpeg" multiple>
-  <div class="btn-row">
-    <button onclick="startCrop('jpegToPdfInput','jpegToPdfCropPreview')">Start Crop</button>
-    <button onclick="applyCrop('jpegToPdfCropPreview')">Apply Crop</button>
-  </div>
+  <div id="jpegToPdfDropZone" class="drop-zone"><p class="small">Drag & Drop Images Here</p></div>
   <div id="jpegToPdfCropPreview" class="preview"></div>
-  <input type="number" id="jpegToPdfTargetKB" placeholder="Target Size (KB)">
-  <button onclick="convertJpegToPdf()">Generate PDF</button>
+  <div class="btn-row">
+    <input type="number" id="jpegToPdfTargetKB" placeholder="Target PDF Size (KB) - optional" style="width:220px">
+    <button onclick="convertJpegToPdf()">Generate PDF</button>
+  </div>
   <div class="pdf-preview-container">
-    <iframe id="jpegToPdfPreview" class="preview-frame"></iframe>
+    <iframe id="jpegToPdfPreview" class="preview-frame" style="height:420px;width:90%;max-width:800px"></iframe>
     <a id="jpegToPdfDownload" class="download-btn" download="output.pdf">Download PDF</a>
   </div>
 </div>
 
-<!-- 2️⃣ PDF ➝ JPEG -->
+<!-- PDF ➝ JPEG -->
 <div class="tab-content" id="pdfToJpeg" style="display:none;">
   <h2>PDF ➝ JPEG</h2>
   <label class="custom-file-label" for="pdfToJpegInput">Choose PDF</label>
   <input type="file" id="pdfToJpegInput" accept="application/pdf">
-  <button onclick="convertPdfToJpeg()">Convert & Preview</button>
+  <div class="btn-row">
+    <button onclick="convertPdfToJpeg()">Convert & Preview</button>
+  </div>
   <div id="pdfToJpegPreview" class="preview"></div>
-  <a id="pdfToJpegDownload" class="download-btn" download="page.jpg">Download JPEG</a>
+  <a id="pdfToJpegDownload" class="download-btn" download="page.jpg" style="display:none">Download JPEG</a>
 </div>
 
-<!-- 3️⃣ Resize JPEG -->
+<!-- Resize JPEG -->
 <div class="tab-content" id="resizeJpeg" style="display:none;">
   <h2>Resize JPEG</h2>
-  <label class="custom-file-label" for="jpegResizeInput">Choose JPEG</label>
-  <input type="file" id="jpegResizeInput" accept="image/jpeg">
+  <label class="custom-file-label" for="jpegResizeInput">Choose JPEG(s)</label>
+  <input type="file" id="jpegResizeInput" accept="image/jpeg" multiple>
+  <div id="jpegResizeDropZone" class="drop-zone"><p class="small">Drag & Drop Images Here</p></div>
   <div class="btn-row">
-    <button onclick="startCrop('jpegResizeInput','jpegResizeCropPreview')">Start Crop</button>
-    <button onclick="applyCrop('jpegResizeCropPreview')">Apply Crop</button>
+    <input type="number" id="jpegResizeTargetKB" placeholder="Target Size (KB) - per image" style="width:220px">
+    <button onclick="resizeAllPreviews()">Resize All (applies target to each)</button>
   </div>
   <div id="jpegResizeCropPreview" class="preview"></div>
-  <input type="number" id="jpegResizeTargetKB" placeholder="Target Size (KB)">
-  <button onclick="resizeJPEG()">Resize & Preview</button>
-  <img id="jpegResizePreview" class="preview-img">
-  <a id="jpegResizeDownload" class="download-btn" download="resized.jpg">Download JPEG</a>
 </div>
 
-<!-- 4️⃣ Resize PDF -->
+<!-- Resize PDF -->
 <div class="tab-content" id="resizePdf" style="display:none;">
   <h2>Resize PDF</h2>
   <label class="custom-file-label" for="pdfResizeInput">Choose PDF</label>
@@ -82,13 +78,13 @@
   <input type="number" id="pdfResizeTargetKB" placeholder="Target Size (KB)">
   <button onclick="resizePDF()">Resize PDF</button>
   <div class="pdf-preview-container">
-    <iframe id="pdfResizePreview" class="preview-frame"></iframe>
+    <iframe id="pdfResizePreview" class="preview-frame" style="height:420px;width:90%;max-width:800px"></iframe>
     <a id="pdfResizeDownload" class="download-btn" download="resized.pdf">Download PDF</a>
   </div>
 </div>
 
 <footer>
-  <p>📩 Contact: <a href="saniking246@gmail.com">saniking246@gmail.com</a> | 📞 +91-9045151477</p>
+  <p>📩 Contact: <a href="mailto:saniking246@gmail.com">saniking246@gmail.com</a> | 📞 +91-9045151477</p>
 </footer>
 
 <script src="script.js"></script>
